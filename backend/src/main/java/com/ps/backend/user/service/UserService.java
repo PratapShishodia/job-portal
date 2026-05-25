@@ -14,4 +14,5 @@ public interface UserService {
     public UserResponseDTO updateUser(UserRequestDTO userRequestDTO);
     public UserResponseDTO deleteUser(long id);
     public Map<String,String> login(LoginDTO loginDTO);
+    public UserResponseDTO getUserByEmail(String email);
 }

@@ -1,11 +1,15 @@
 package com.ps.backend.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 public class ProfileRequestDTO {
+    private String firstName;
+    private String lastName;
+    @NotBlank(message = "Job Title is Required")
     private String jobTitle;
     private String baseLocation;
     private int experience;

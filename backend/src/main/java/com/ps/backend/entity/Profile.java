@@ -14,6 +14,8 @@ public class Profile extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long profileId;
+    private String firstName;
+    private String lastName;
     private String jobTitle;
     private String baseLocation;
     private int experience;
@@ -27,6 +29,6 @@ public class Profile extends BaseEntity{
     private String resumeType;
     @OneToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId",nullable = false)
     private Users user;
 }

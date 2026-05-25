@@ -1,20 +1,16 @@
 package com.ps.backend.dto;
 
-import com.ps.backend.entity.Users;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ProfileResponseDTO {
     private Long profileId;
+    private String firstName;
+    private String lastName;
     private String jobTitle;
     private String baseLocation;
     private int experience;

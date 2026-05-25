@@ -1,5 +1,6 @@
 package com.ps.backend.mapper;
 
+import com.ps.backend.dto.ProfileResponseDTO;
 import com.ps.backend.dto.UserRequestDTO;
 import com.ps.backend.dto.UserResponseDTO;
 import com.ps.backend.entity.Users;
@@ -14,7 +15,9 @@ public class UserDTOMapper {
         userResponseDTO.setUserEmail(user.getUserEmail());
         userResponseDTO.setNumber(user.getNumber());
         userResponseDTO.setRole(user.getRole());
-        userResponseDTO.setProfileId(user.getProfile().getProfileId());
+        if(user.getProfile() != null) {
+            userResponseDTO.setProfileId(user.getProfile().getProfileId());
+        }
         return userResponseDTO;
     }
 

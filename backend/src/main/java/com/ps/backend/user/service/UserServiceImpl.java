@@ -72,8 +72,11 @@ public class UserServiceImpl implements UserService {
         else{
             throw new BadCredentialsException("Bad credentials");
         }
-
-
         return map;
+    }
+
+    public UserResponseDTO getUserByEmail(String email) {
+        Users user = userRepo.findByUserEmail(email).orElseThrow(()->new RuntimeException("User not found"));
+        return UserDTOMapper.toDTO(user);
     }
 }

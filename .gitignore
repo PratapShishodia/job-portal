@@ -9,3 +9,12 @@
 
 # Logs
 /logs
+
+# Environment variables
+/backend/.env
+
+# Generated files
+/out/
+
+# Java
+*.class

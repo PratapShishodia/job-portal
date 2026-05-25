@@ -19,9 +19,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserResponseDTO>> getAllUsers(@RequestParam(required = false,defaultValue = "0") int page_num, @RequestParam(required = false,defaultValue = "10") int page_size) {
-        return ResponseEntity.ok(userService.getUserAllUsers(page_num,page_size));
+    public ResponseEntity<UserResponseDTO> getUsers(@RequestParam String email) {
+        return ResponseEntity.ok(userService.getUserByEmail(email));
     }
+
+//    @GetMapping
+//    public ResponseEntity<List<UserResponseDTO>> getAllUsers(@RequestParam(required = false,defaultValue = "0") int page_num, @RequestParam(required = false,defaultValue = "10") int page_size) {
+//        return ResponseEntity.ok(userService.getUserAllUsers(page_num,page_size));
+//    }
 
     @GetMapping("/{role}")
     public ResponseEntity<List<UserResponseDTO>> getUsersByRole(@RequestParam(required = false,defaultValue = "0") int page_num, @RequestParam(required = false,defaultValue = "10") int page_size,@PathVariable String role) {
