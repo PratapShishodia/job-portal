@@ -1,8 +1,10 @@
 package com.ps.backend.mapper;
 
-import com.ps.backend.dto.JobRequestDTO;
-import com.ps.backend.dto.JobResponseDTO;
+import com.ps.backend.dto.jobDTO.JobRequestDTO;
+import com.ps.backend.dto.jobDTO.JobResponseDTO;
 import com.ps.backend.entity.Job;
+
+import java.util.stream.Collectors;
 
 public class JobDTOMapper {
     public static JobResponseDTO toDTO(Job job) {
@@ -27,7 +29,8 @@ public class JobDTOMapper {
         dto.setUrgent(job.isUrgent());
         dto.setRemote(job.isRemote());
         dto.setStatus(job.getStatus());
-        dto.setCompanyId(job.getCompany().getCompanyId());;
+        dto.setCompanyid(job.getCompany().getCompanyId());
+        dto.setJobApplications(job.getJobApplications().stream().map(JobApplicationDTOMapper::toDTO).collect(Collectors.toSet()));
         return dto;
     }
 
@@ -45,7 +48,9 @@ public class JobDTOMapper {
         job.setJobDesc(dto.getJobDesc());
         job.setRequirements(dto.getRequirements());
         job.setBenefits(dto.getBenefits());
+        job.setDatePosted(dto.getDatePosted());
         job.setLastDate(dto.getLastDate());
+        job.setApplicationCount(dto.getApplicationCount());
         job.setFeatured(dto.isFeatured());
         job.setUrgent(dto.isUrgent());
         job.setRemote(dto.isRemote());

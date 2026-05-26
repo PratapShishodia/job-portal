@@ -1,16 +1,13 @@
-package com.ps.backend.dto;
+package com.ps.backend.dto.contact;
 
 import com.ps.backend.enums.ContactSubject;
 import com.ps.backend.enums.Roles;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-public class ContactResponseDTO {
-    private long contactId;
+public class ContactRequestDTO {
     private String fullName;
     private Roles userType;
     private ContactSubject subject;

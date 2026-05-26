@@ -1,7 +1,7 @@
 package com.ps.backend.mapper;
 
-import com.ps.backend.dto.ProfileRequestDTO;
-import com.ps.backend.dto.ProfileResponseDTO;
+import com.ps.backend.dto.profileDTO.ProfileRequestDTO;
+import com.ps.backend.dto.profileDTO.ProfileResponseDTO;
 import com.ps.backend.entity.Profile;
 
 public class ProfileDTOMapper {
@@ -23,7 +23,6 @@ public class ProfileDTOMapper {
         dto.setResume(profile.getResume());
         dto.setResumeName(profile.getResumeName());
         dto.setResumeType(profile.getResumeType());
-        dto.setUser(profile.getUser().getUserId());
         return  dto;
     }
 

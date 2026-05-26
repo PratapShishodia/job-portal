@@ -12,19 +12,19 @@ import lombok.Setter;
 public class Contact extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID",nullable = false)
+    @Column(name = "CONTACT_ID")
     private long contactId;
-    @Column(name = "FULLNAME",nullable = false)
+    @Column(name = "FULLNAME")
     private String fullName;
-    @Column(name = "USER_ROLE")
+    @Column(name = "USER_TYPE")
     @Enumerated(EnumType.STRING)
     private Roles userType;
     @Column(name = "SUBJECT")
     @Enumerated(EnumType.STRING)
     private ContactSubject subject;
-    @Column(name = "Message",length = 500)
+    @Column(name = "MESSAGE")
     public String message;
-    @Column(name = "Status",columnDefinition = "varchar(255) default 'NEW'")
+    @Column(name = "STATUS",columnDefinition = "varchar(255) default 'NEW'")
     public String status;
     @Column(name = "USER_EMAIL")
     public String userEmail;

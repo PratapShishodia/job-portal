@@ -1,12 +1,10 @@
-package com.ps.backend.dto;
+package com.ps.backend.dto.profileDTO;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class ProfileResponseDTO {
     private Long profileId;
     private String firstName;
@@ -22,5 +20,4 @@ public class ProfileResponseDTO {
     private String resume;
     private String resumeName;
     private String resumeType;
-    private long user;
 }

@@ -1,4 +1,4 @@
-package com.ps.backend.dto;
+package com.ps.backend.dto.commonDTO;
 
 import org.springframework.http.HttpStatus;
 

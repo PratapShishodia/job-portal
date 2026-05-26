@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -27,8 +29,8 @@ public class Profile extends BaseEntity{
     private String resume;
     private String resumeName;
     private String resumeType;
-    @OneToOne(cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Users user;
 }

@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Setter
 @Getter
@@ -11,18 +14,23 @@ import lombok.Setter;
 public class Users extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false, name = "USER_ID")
     private long userId;
-    @Column(name = "USER_NAME")
     private String userName;
-    @Column(name = "USER_EMAIL")
     private String userEmail;
-    @Column(name = "HASH_PASSWORD")
     private String password;
-    @Column(name = "NUMBER")
     private String number;
-    @Column(name = "ROLE")
     private String role;
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
+    @ManyToMany
+    @JoinTable(
+            name = "tbl_job_user",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "jobId")
+    )
+    private Set<Job> savedJobs;
+    @OneToOne(mappedBy = "user")
     private Profile profile;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true,mappedBy = "user")
+    private List<JobApplication> jobApplications;
+
 }

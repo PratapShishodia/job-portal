@@ -1,17 +1,13 @@
-package com.ps.backend.dto;
+package com.ps.backend.dto.jobDTO;
 
-import com.ps.backend.entity.Company;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
 
 @Getter
 @Setter
-@NoArgsConstructor
-public class JobResponseDTO {
-    private long jobId;
+public class JobRequestDTO {
     private String jobTitle;
     private String jobLocations;
     private String workType;
@@ -26,10 +22,10 @@ public class JobResponseDTO {
     private String benefits;
     private Instant datePosted;
     private Instant lastDate;
-    private int applicationCount;
-    private boolean featured;
-    private boolean urgent;
-    private boolean remote;
-    private String status;
-    private Long companyId;
+    private int applicationCount = 0;
+    private boolean featured = false;
+    private boolean urgent = false;
+    private boolean remote = false;
+    private String status = "NEW";
+    private long company;
 }

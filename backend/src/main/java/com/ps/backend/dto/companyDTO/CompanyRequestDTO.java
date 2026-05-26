@@ -1,20 +1,14 @@
-package com.ps.backend.dto;
+package com.ps.backend.dto.companyDTO;
 
-import com.ps.backend.entity.Job;
 import com.ps.backend.enums.CompanyField;
-import jdk.dynalink.linker.LinkerServices;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Setter
 @Getter
-@NoArgsConstructor
-public class CompanyResponseDTO {
-    private long companyId;
+public class CompanyRequestDTO {
     private String companyName;
     private String companyDesc;
     private String companyLogo;
@@ -24,6 +18,5 @@ public class CompanyResponseDTO {
     private int founded;
     private int openPosition;
     private BigDecimal ratings;
-    private String locations;
-    private List<Long> jobs;
+    private String Locations;
 }

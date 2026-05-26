@@ -1,10 +1,9 @@
 package com.ps.backend.handler;
 
-import com.ps.backend.dto.ErrorResponseDTO;
+import com.ps.backend.dto.commonDTO.ErrorResponseDTO;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.method.ParameterValidationResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -61,12 +60,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ErrorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex, WebRequest webRequest) {
-        ErrorResponseDTO ErrorResponseDTO = new ErrorResponseDTO(
-                webRequest.getDescription(false), HttpStatus.UNAUTHORIZED,
-                ex.getMessage(), LocalDateTime.now(),"willAdd");
-        return new ResponseEntity<>(ErrorResponseDTO, HttpStatus.UNAUTHORIZED);
-    }
+//    @ExceptionHandler(BadCredentialsException.class)
+//    public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex, WebRequest webRequest) {
+//        ErrorResponseDTO ErrorResponseDTO = new ErrorResponseDTO(
+//                webRequest.getDescription(false), HttpStatus.UNAUTHORIZED,
+//                ex.getMessage(), LocalDateTime.now(),"willAdd");
+//        return new ResponseEntity<>(ErrorResponseDTO, HttpStatus.UNAUTHORIZED);
+//    }
 
 }

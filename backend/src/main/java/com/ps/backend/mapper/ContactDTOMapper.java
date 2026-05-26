@@ -1,7 +1,7 @@
 package com.ps.backend.mapper;
 
-import com.ps.backend.dto.ContactRequestDTO;
-import com.ps.backend.dto.ContactResponseDTO;
+import com.ps.backend.dto.contact.ContactRequestDTO;
+import com.ps.backend.dto.contact.ContactResponseDTO;
 import com.ps.backend.entity.Contact;
 
 public class ContactDTOMapper {
