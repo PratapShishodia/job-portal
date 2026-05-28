@@ -31,6 +31,6 @@ public class JobResponseDTO {
     private boolean urgent;
     private boolean remote;
     private String status;
-    private long companyid;
-    private Set<JobApplicationResponseDTO> jobApplications;
+    private long companyId;
+    private String companyName;
 }

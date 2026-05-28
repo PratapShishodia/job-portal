@@ -9,6 +9,6 @@ public class JobApplicationRequestDTO {
     private String status;
     private String coverLetter;
     private String notes;
-    private long user;
-    private long job;
+    private long userId;
+    private long jobId;
 }

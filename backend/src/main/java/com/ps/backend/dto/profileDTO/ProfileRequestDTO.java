@@ -19,5 +19,5 @@ public class ProfileRequestDTO {
     private String resume;
     private String resumeName;
     private String resumeType;
-    private long user;
+    private long userId;
 }

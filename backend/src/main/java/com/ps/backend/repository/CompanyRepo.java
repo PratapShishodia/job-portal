@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CompanyRepo extends JpaRepository<Company,Long> {
     Page<Company> findAllByCompanyField(Pageable pageable, CompanyField companyField);
+    boolean existsByCompanyName(String name);
 }

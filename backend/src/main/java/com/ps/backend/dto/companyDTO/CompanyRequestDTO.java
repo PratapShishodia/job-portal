@@ -16,7 +16,5 @@ public class CompanyRequestDTO {
     private int employeeCount;
     private String size;
     private int founded;
-    private int openPosition;
-    private BigDecimal ratings;
-    private String Locations;
+    private String locations;
 }

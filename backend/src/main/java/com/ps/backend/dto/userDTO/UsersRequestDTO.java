@@ -11,5 +11,4 @@ public class UsersRequestDTO {
     private String password;
     private String number;
     private String role;
-    private long profile;
 }

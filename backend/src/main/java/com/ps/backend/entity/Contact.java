@@ -5,6 +5,13 @@ import com.ps.backend.enums.Roles;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+@NamedQueries({
+        @NamedQuery(
+                name = "Contact.updateContactById",
+                query = "Update Contact c set c.status = :status  where c.contactId = :contactId "
+        )
+})
 @Getter
 @Setter
 @Entity
@@ -25,7 +32,7 @@ public class Contact extends BaseEntity{
     @Column(name = "MESSAGE")
     public String message;
     @Column(name = "STATUS",columnDefinition = "varchar(255) default 'NEW'")
-    public String status;
+    public String status = "NEW";
     @Column(name = "USER_EMAIL")
     public String userEmail;
 }

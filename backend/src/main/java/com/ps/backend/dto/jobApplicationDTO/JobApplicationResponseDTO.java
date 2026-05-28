@@ -10,8 +10,10 @@ import java.time.Instant;
 @Setter
 public class JobApplicationResponseDTO {
     private Long applicationId;
+    private Instant appliedAt;
     private String status;
     private String coverLetter;
     private String notes;
-    private long user;
+    private long userId;
+    private long jobId;
 }

@@ -1,4 +1,4 @@
-package com.ps.backend.dto.contact;
+package com.ps.backend.dto.contactDTO;
 
 import com.ps.backend.enums.ContactSubject;
 import com.ps.backend.enums.Roles;

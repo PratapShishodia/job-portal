@@ -15,6 +15,4 @@ public class UsersResponseDTO {
     private String userEmail;
     private String number;
     private String role;
-    private ProfileResponseDTO profile;
-    private List<JobApplicationResponseDTO> jobApplications;
 }

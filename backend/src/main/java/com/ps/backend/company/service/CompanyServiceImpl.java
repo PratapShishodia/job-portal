@@ -1,0 +1,65 @@
+package com.ps.backend.company.service;
+
+import com.ps.backend.dto.commonDTO.PageResponseDTO;
+import com.ps.backend.dto.companyDTO.CompanyRequestDTO;
+import com.ps.backend.dto.companyDTO.CompanyResponseDTO;
+import com.ps.backend.entity.Company;
+import com.ps.backend.enums.CompanyField;
+import com.ps.backend.mapper.CompanyDTOMapper;
+import com.ps.backend.repository.CompanyRepo;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class CompanyServiceImpl implements CompanyService{
+
+    private final CompanyRepo companyRepo;
+
+    public PageResponseDTO<CompanyResponseDTO> getCompanyByField(int page_num, int page_size, String sortBy, String sortdirc, String field) {
+        Sort sort = sortdirc.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+        Pageable pageable = PageRequest.of(page_num, page_size,sort);
+        Page<Company> companyPage = companyRepo.findAllByCompanyField(pageable, CompanyField.valueOf(field));
+        List<CompanyResponseDTO> companyList = companyPage.getContent().stream().map(CompanyDTOMapper::toDTO).toList();
+        PageResponseDTO<CompanyResponseDTO> response = new PageResponseDTO<>();
+        response.setContent(companyList);
+        response.setPageNumber(companyPage.getNumber());
+        response.setPageSize(companyPage.getSize());
+        response.setTotalElements(companyPage.getTotalElements());
+        response.setTotalPages(companyPage.getTotalPages());
+        response.setLastPage(companyPage.isLast());
+        return response;
+    }
+
+    public PageResponseDTO<CompanyResponseDTO> getAllCompany(int page_num, int page_size, String sortBy, String sortdirc) {
+        Sort sort = sortdirc.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+        Pageable pageable = PageRequest.of(page_num, page_size,sort);
+        Page<Company> companyPage = companyRepo.findAll(pageable);
+        List<CompanyResponseDTO> companyList = companyPage.getContent().stream().map(CompanyDTOMapper::toDTO).toList();
+        PageResponseDTO<CompanyResponseDTO> response = new PageResponseDTO<>();
+        response.setContent(companyList);
+        response.setPageNumber(companyPage.getNumber());
+        response.setPageSize(companyPage.getSize());
+        response.setTotalElements(companyPage.getTotalElements());
+        response.setTotalPages(companyPage.getTotalPages());
+        response.setLastPage(companyPage.isLast());
+        return response;
+    }
+
+    @Transactional
+    public CompanyResponseDTO addCompany(CompanyRequestDTO companyDTO) {
+        if(companyRepo.existsByCompanyName(companyDTO.getCompanyName())){
+            throw new RuntimeException("Company already exists");
+        }
+        Company company = CompanyDTOMapper.toEntity(companyDTO);
+        return CompanyDTOMapper.toDTO(companyRepo.save(company));
+    }
+}

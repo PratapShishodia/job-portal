@@ -7,28 +7,26 @@ import com.ps.backend.entity.Users;
 public class UserDTOMapper {
 
     public static UsersResponseDTO toDTO(Users user) {
-        UsersResponseDTO userResponseDTO = new UsersResponseDTO();
-        userResponseDTO.setUserId(user.getUserId());
-        userResponseDTO.setUserName(user.getUserName());
-        userResponseDTO.setUserEmail(user.getUserEmail());
-        userResponseDTO.setNumber(user.getNumber());
-        userResponseDTO.setRole(user.getRole());
-        if(user.getProfile() != null) {
-            userResponseDTO.setProfile(ProfileDTOMapper.toDTO(user.getProfile()));
-        }
-        if(user.getJobApplications() != null) {
-            userResponseDTO.setJobApplications(user.getJobApplications().stream().map(JobApplicationDTOMapper::toDTO).toList());
-        }
-        return userResponseDTO;
+        UsersResponseDTO dto = new UsersResponseDTO();
+
+        dto.setUserId(user.getUserId());
+        dto.setUserName(user.getUserName());
+        dto.setUserEmail(user.getUserEmail());
+        dto.setNumber(user.getNumber());
+        dto.setRole(user.getRole());
+
+        return dto;
     }
 
-    public static Users toEntity(UsersRequestDTO userRequestDTO) {
+    public static Users toEntity(UsersRequestDTO dto) {
         Users user = new Users();
-        user.setUserName(userRequestDTO.getUserName());
-        user.setUserEmail(userRequestDTO.getUserEmail());
-        user.setPassword(userRequestDTO.getPassword());
-        user.setNumber(userRequestDTO.getNumber());
-        user.setRole(userRequestDTO.getRole());
+
+        user.setUserName(dto.getUserName());
+        user.setUserEmail(dto.getUserEmail());
+        user.setPassword(dto.getPassword());
+        user.setNumber(dto.getNumber());
+        user.setRole(dto.getRole());
+
         return user;
     }
 

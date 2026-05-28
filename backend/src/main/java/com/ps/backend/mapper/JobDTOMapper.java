@@ -2,6 +2,7 @@ package com.ps.backend.mapper;
 
 import com.ps.backend.dto.jobDTO.JobRequestDTO;
 import com.ps.backend.dto.jobDTO.JobResponseDTO;
+import com.ps.backend.entity.Company;
 import com.ps.backend.entity.Job;
 
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 public class JobDTOMapper {
     public static JobResponseDTO toDTO(Job job) {
         JobResponseDTO dto = new JobResponseDTO();
+
         dto.setJobId(job.getJobId());
         dto.setJobTitle(job.getJobTitle());
         dto.setJobLocations(job.getJobLocations());
@@ -29,8 +31,12 @@ public class JobDTOMapper {
         dto.setUrgent(job.isUrgent());
         dto.setRemote(job.isRemote());
         dto.setStatus(job.getStatus());
-        dto.setCompanyid(job.getCompany().getCompanyId());
-        dto.setJobApplications(job.getJobApplications().stream().map(JobApplicationDTOMapper::toDTO).collect(Collectors.toSet()));
+
+        if(job.getCompany() != null){
+            dto.setCompanyId(job.getCompany().getCompanyId());
+            dto.setCompanyName(job.getCompany().getCompanyName());
+        }
+
         return dto;
     }
 
@@ -48,13 +54,10 @@ public class JobDTOMapper {
         job.setJobDesc(dto.getJobDesc());
         job.setRequirements(dto.getRequirements());
         job.setBenefits(dto.getBenefits());
-        job.setDatePosted(dto.getDatePosted());
         job.setLastDate(dto.getLastDate());
-        job.setApplicationCount(dto.getApplicationCount());
         job.setFeatured(dto.isFeatured());
         job.setUrgent(dto.isUrgent());
         job.setRemote(dto.isRemote());
-        job.setStatus(dto.getStatus());
         return job;
     }
 }

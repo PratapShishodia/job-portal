@@ -1,12 +1,11 @@
 package com.ps.backend.dto.companyDTO;
 
-import com.ps.backend.dto.jobDTO.JobResponseDTO;
+
 import com.ps.backend.enums.CompanyField;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Setter
 @Getter
@@ -21,7 +20,6 @@ public class CompanyResponseDTO {
     private int founded;
     private int openPosition;
     private BigDecimal ratings;
-    private String Locations;
-    private List<JobResponseDTO> jobs;
+    private String locations;
 }
 

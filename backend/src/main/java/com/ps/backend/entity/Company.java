@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tools.jackson.core.ObjectReadContext;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "tbl_company")
-public class Company {
+public class Company extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COMPANY_ID")
@@ -36,10 +37,10 @@ public class Company {
     private int founded;
     @Column(name = "OPEN_POSITIONS",columnDefinition = "integer default 0")
     private int openPosition = 0;
-    @Column(name = "RATINGS",columnDefinition = "numeric(3,2) default 0.0")
+//    @Column(name = "RATINGS",columnDefinition = "numeric(3,2) default 0.0")
     private BigDecimal ratings = BigDecimal.ZERO;
     @Column(name = "LOCATIONS")
     private String Locations;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "company")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "company")
     private List<Job> jobs;
 }

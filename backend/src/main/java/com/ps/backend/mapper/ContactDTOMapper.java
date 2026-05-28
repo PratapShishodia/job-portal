@@ -1,31 +1,32 @@
 package com.ps.backend.mapper;
 
-import com.ps.backend.dto.contact.ContactRequestDTO;
-import com.ps.backend.dto.contact.ContactResponseDTO;
+import com.ps.backend.dto.contactDTO.ContactRequestDTO;
+import com.ps.backend.dto.contactDTO.ContactResponseDTO;
 import com.ps.backend.entity.Contact;
 
 public class ContactDTOMapper {
 
     public static ContactResponseDTO toDTO(Contact contact){
-        ContactResponseDTO responseDTO = new ContactResponseDTO();
-        responseDTO.setContactId(contact.getContactId());
-        responseDTO.setFullName(contact.getFullName());
-        responseDTO.setUserType(contact.getUserType());
-        responseDTO.setSubject(contact.getSubject());
-        responseDTO.setMessage(contact.getMessage());
-        responseDTO.setStatus(contact.getStatus());
-        responseDTO.setUserEmail(contact.getUserEmail());
-        return responseDTO;
+        ContactResponseDTO dto = new ContactResponseDTO();
+
+        dto.setContactId(contact.getContactId());
+        dto.setFullName(contact.getFullName());
+        dto.setUserType(contact.getUserType());
+        dto.setSubject(contact.getSubject());
+        dto.setMessage(contact.getMessage());
+        dto.setStatus(contact.getStatus());
+        dto.setUserEmail(contact.getUserEmail());
+
+        return dto;
     }
 
-    public static Contact toEntity(ContactRequestDTO requestDTO){
+    public static Contact toEntity(ContactRequestDTO dto){
         Contact contact = new Contact();
-        contact.setFullName(requestDTO.getFullName());
-        contact.setUserType(requestDTO.getUserType());
-        contact.setSubject(requestDTO.getSubject());
-        contact.setMessage(requestDTO.getMessage());
-        contact.setStatus(requestDTO.getStatus());
-        contact.setUserEmail(requestDTO.getUserEmail());
+        contact.setFullName(dto.getFullName());
+        contact.setUserType(dto.getUserType());
+        contact.setSubject(dto.getSubject());
+        contact.setMessage(dto.getMessage());
+        contact.setUserEmail(dto.getUserEmail());
         return contact;
     }
 }

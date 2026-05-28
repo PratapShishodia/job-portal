@@ -20,12 +20,9 @@ public class JobRequestDTO {
     private String jobDesc;
     private String requirements;
     private String benefits;
-    private Instant datePosted;
     private Instant lastDate;
-    private int applicationCount = 0;
-    private boolean featured = false;
-    private boolean urgent = false;
-    private boolean remote = false;
-    private String status = "NEW";
-    private long company;
+    private boolean featured;
+    private boolean urgent;
+    private boolean remote;
+    private Long companyId;
 }

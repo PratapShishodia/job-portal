@@ -20,4 +20,5 @@ public class ProfileResponseDTO {
     private String resume;
     private String resumeName;
     private String resumeType;
+    private long userId;
 }
