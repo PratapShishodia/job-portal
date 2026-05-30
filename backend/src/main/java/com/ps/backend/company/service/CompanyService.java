@@ -11,4 +11,6 @@ public interface CompanyService {
     public PageResponseDTO<CompanyResponseDTO> getCompanyByField(int page_num, int page_size, String sortBy, String sortDirc, String field);
     public PageResponseDTO<CompanyResponseDTO> getAllCompany(int page_num,int page_size,String sortBy,String sortDirc);
     public CompanyResponseDTO addCompany(CompanyRequestDTO companyDTO);
+    public CompanyResponseDTO updateCompany(long companyId,CompanyRequestDTO companyDTO);
+    public String deleteCompany(long companyId);
 }

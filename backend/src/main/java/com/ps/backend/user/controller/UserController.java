@@ -1,6 +1,7 @@
 package com.ps.backend.user.controller;
 
 import com.ps.backend.dto.commonDTO.LoginDTO;
+import com.ps.backend.dto.commonDTO.PasswordChangeDTO;
 import com.ps.backend.dto.userDTO.UsersRequestDTO;
 import com.ps.backend.dto.userDTO.UsersResponseDTO;
 import com.ps.backend.user.service.UserService;
@@ -18,12 +19,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<UsersResponseDTO> getuserByID(@RequestParam String email) {
+    public ResponseEntity<UsersResponseDTO> getUserByID(@RequestParam String email) {
         return ResponseEntity.ok(userService.getUsers(email));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<UsersResponseDTO> signup(@Valid @RequestBody UsersRequestDTO usersRequestDTO) {
+    public ResponseEntity<UsersResponseDTO> signUp(@Valid @RequestBody UsersRequestDTO usersRequestDTO) {
         return ResponseEntity.ok(userService.signUp(usersRequestDTO));
     }
 
@@ -31,4 +32,15 @@ public class UserController {
     public ResponseEntity<Map<String,String>> login(@Valid @RequestBody LoginDTO loginDTO) {
         return ResponseEntity.ok(userService.login(loginDTO));
     }
+
+    @PatchMapping("/update")
+    public ResponseEntity<UsersResponseDTO> updateUser(@RequestParam int userId, @Valid @RequestBody UsersRequestDTO usersRequestDTO) {
+        return ResponseEntity.ok(userService.update(userId,usersRequestDTO));
+    }
+
+    @PatchMapping("/changePassword")
+    public ResponseEntity<String> changePassword(@RequestParam int userId, @Valid @RequestBody PasswordChangeDTO passwordChangeDTO) {
+        return ResponseEntity.ok(userService.changePassword(userId,passwordChangeDTO));
+    }
+
 }

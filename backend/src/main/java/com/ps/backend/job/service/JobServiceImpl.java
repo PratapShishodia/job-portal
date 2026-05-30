@@ -58,4 +58,18 @@ public class JobServiceImpl implements JobService {
         response.setLastPage(jobs.isLast());
         return response;
     }
+
+    public PageResponseDTO<JobResponseDTO> getAllJobsByWorkType(int pageNum, int pageSize, String sortBy, String direction, String workType) {
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+        Page<Job> jobs = jobRepo.findAllByWorkType(pageable,workType);
+        List<JobResponseDTO> content =  jobs.getContent().stream().map(JobDTOMapper::toDTO).toList();
+        PageResponseDTO<JobResponseDTO> response = new PageResponseDTO<>();
+        response.setContent(content);
+        response.setPageNumber(jobs.getNumber());
+        response.setPageSize(jobs.getSize());
+        response.setTotalElements(jobs.getTotalElements());
+        response.setTotalPages(jobs.getTotalPages());
+        response.setLastPage(jobs.isLast());
+        return response;
+    }
 }

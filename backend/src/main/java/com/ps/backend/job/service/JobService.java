@@ -12,4 +12,5 @@ public interface JobService {
     public JobResponseDTO addJob(JobRequestDTO jobRequestDTO);
     public PageResponseDTO<JobResponseDTO> getAllJobs(int pageNum, int pageSize, String sortBy, String direction);
     public PageResponseDTO<JobResponseDTO> getAllJobsByCompanyID(int pageNum, int pageSize,String sortBy,String direction,long companyId);
+    public PageResponseDTO<JobResponseDTO> getAllJobsByWorkType(int pageNum, int pageSize,String sortBy,String direction,String workType);
 }

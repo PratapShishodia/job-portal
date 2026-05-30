@@ -42,7 +42,7 @@ public class CompanyServiceImpl implements CompanyService{
     public PageResponseDTO<CompanyResponseDTO> getAllCompany(int page_num, int page_size, String sortBy, String sortdirc) {
         Sort sort = sortdirc.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
         Pageable pageable = PageRequest.of(page_num, page_size,sort);
-        Page<Company> companyPage = companyRepo.findAll(pageable);
+        Page<Company> companyPage = companyRepo.findAllWithJobsByStatus(pageable);
         List<CompanyResponseDTO> companyList = companyPage.getContent().stream().map(CompanyDTOMapper::toDTO).toList();
         PageResponseDTO<CompanyResponseDTO> response = new PageResponseDTO<>();
         response.setContent(companyList);
@@ -61,5 +61,53 @@ public class CompanyServiceImpl implements CompanyService{
         }
         Company company = CompanyDTOMapper.toEntity(companyDTO);
         return CompanyDTOMapper.toDTO(companyRepo.save(company));
+    }
+
+    @Transactional
+    public CompanyResponseDTO updateCompany(long companyId, CompanyRequestDTO companyDTO) {
+        Company company = companyRepo.findById(companyId).orElseThrow(() -> new RuntimeException("Company id not found"));
+        if(companyRepo.existsByCompanyNameAndCompanyIdNot(company.getCompanyName(),companyId)){
+            throw new RuntimeException("Company already exists");
+        }
+//        private String companyName;
+        if(companyDTO.getCompanyName() != null){
+            company.setCompanyName(companyDTO.getCompanyName());
+        }
+//        private String companyDesc;
+        if(companyDTO.getCompanyDesc() != null){
+            company.setCompanyDesc(companyDTO.getCompanyDesc());
+        }
+//        private String companyLogo;
+        if(companyDTO.getCompanyLogo() != null){
+            company.setCompanyLogo(companyDTO.getCompanyLogo());
+        }
+//        private CompanyField companyField;
+        if(companyDTO.getCompanyField() != null){
+            company.setCompanyField(companyDTO.getCompanyField());
+        }
+//        private int employeeCount;
+        if(companyDTO.getEmployeeCount() != 0){
+            company.setEmployeeCount(companyDTO.getEmployeeCount());
+        }
+//        private String size;
+        if(companyDTO.getSize() != null){
+            company.setSize(companyDTO.getSize());
+        }
+//        private int founded;
+        if(companyDTO.getFounded() != 0){
+            company.setFounded(companyDTO.getFounded());
+        }
+//        private String locations;
+        if(companyDTO.getLocations() != null){
+            company.setLocations(companyDTO.getLocations());
+        }
+        return CompanyDTOMapper.toDTO(companyRepo.save(company));
+    }
+
+    @Transactional
+    public String deleteCompany(long companyId) {
+        Company company = companyRepo.findById(companyId).orElseThrow(() -> new RuntimeException("Company id not found"));
+        companyRepo.delete(company);
+        return "Company deleted Successfully";
     }
 }

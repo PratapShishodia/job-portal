@@ -1,6 +1,7 @@
 package com.ps.backend.user.service;
 
 import com.ps.backend.dto.commonDTO.LoginDTO;
+import com.ps.backend.dto.commonDTO.PasswordChangeDTO;
 import com.ps.backend.dto.userDTO.UsersRequestDTO;
 import com.ps.backend.dto.userDTO.UsersResponseDTO;
 import com.ps.backend.entity.Profile;
@@ -59,5 +60,62 @@ public class UserServiceImpl implements UserService {
             throw new BadCredentialsException("Bad credentials");
         }
         return map;
+    }
+
+    @Transactional
+    public UsersResponseDTO update(long userId,UsersRequestDTO usersRequestDTO) {
+        Users user = userRepo.findById(userId).orElseThrow(()->new RuntimeException("User not found"));
+        if(usersRequestDTO.getUserName() != null &&
+                userRepo.existsByUserNameAndUserIdNot(
+                        usersRequestDTO.getUserName(),
+                        userId
+                )){
+            throw new RuntimeException("Username already exists");
+        }
+        if(usersRequestDTO.getUserEmail() != null &&
+                userRepo.existsByUserEmailAndUserIdNot(
+                        usersRequestDTO.getUserEmail(),
+                        userId
+                )){
+            throw new RuntimeException("Email already exists");
+        }
+        if(usersRequestDTO.getUserName() != null &&
+                !usersRequestDTO.getUserName().trim().isEmpty()){
+            user.setUserName(usersRequestDTO.getUserName());
+        }
+        if(usersRequestDTO.getUserEmail() != null &&
+                !usersRequestDTO.getUserEmail().trim().isEmpty()){
+            user.setUserEmail(usersRequestDTO.getUserEmail());
+        }
+        if(usersRequestDTO.getNumber() != null &&
+                !usersRequestDTO.getNumber().trim().isEmpty()){
+            user.setNumber(usersRequestDTO.getNumber());
+        }
+        if(usersRequestDTO.getRole() != null &&
+                !usersRequestDTO.getRole().trim().isEmpty()){
+            user.setRole(usersRequestDTO.getRole());
+        }
+        return UserDTOMapper.toDTO(userRepo.save(user));
+    }
+
+    @Transactional
+    public String changePassword(long userId, PasswordChangeDTO passwordChangeDTO) {
+        Users user = userRepo.findById(userId).orElseThrow(()->new RuntimeException("User not found"));
+        System.out.println("Username: " + user.getUserName());
+        System.out.println("Password: " + passwordChangeDTO.oldPassword());
+        System.out.println("New Password: " + passwordChangeDTO.newPassword());
+        if (passwordChangeDTO.oldPassword() != null &&
+                passwordChangeDTO.newPassword() != null) {
+            boolean isMatch = encoder.matches(
+                    passwordChangeDTO.oldPassword(),
+                    user.getPassword()
+            );
+            if (!isMatch) {
+                throw new RuntimeException("Old password is incorrect");
+            }
+            user.setPassword(encoder.encode(passwordChangeDTO.newPassword()));
+            userRepo.save(user);
+        }
+        return "Password changed successfully";
     }
 }

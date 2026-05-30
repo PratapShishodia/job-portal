@@ -26,7 +26,58 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Transactional
-    public ProfileResponseDTO updateProfile(ProfileRequestDTO profileRequestDTO) {
+    public ProfileResponseDTO updateProfile(long profileId,ProfileRequestDTO profileRequestDTO) {
+        Profile profile = profileRepo.findById(profileId).orElseThrow(()->new IllegalArgumentException("Profile not found!"));
+        if(profileRequestDTO.getFirstName()!=null){
+            profile.setFirstName(profileRequestDTO.getFirstName());
+        }
+        if(profileRequestDTO.getLastName()!=null){
+            profile.setLastName(profileRequestDTO.getLastName());
+        };
+        if(profileRequestDTO.getJobTitle()!=null){
+            profile.setJobTitle(profileRequestDTO.getJobTitle());
+        };
+        if(profileRequestDTO.getBaseLocation()!=null){
+            profile.setBaseLocation(profileRequestDTO.getBaseLocation());
+        };
+        if(profileRequestDTO.getExperience() != 0){
+            profile.setExperience(profileRequestDTO.getExperience());
+        };
+        if(profileRequestDTO.getBio()!=null){
+            profile.setBio(profileRequestDTO.getBio());
+        };
+        if(profileRequestDTO.getWebsite()!=null){
+            profile.setWebsite(profileRequestDTO.getWebsite());
+        };
+        if(profileRequestDTO.getProfilePic()!=null){
+            profile.setProfilePic(profileRequestDTO.getProfilePic());
+        };
+        if(profileRequestDTO.getPicName()!=null){
+            profile.setPicName(profileRequestDTO.getPicName());
+        };
+        if(profileRequestDTO.getPicType()!=null){
+            profile.setPicType(profileRequestDTO.getPicType());
+        };
+        if(profileRequestDTO.getResume()!=null){
+            profile.setResume(profileRequestDTO.getResume());
+        };
+        if(profileRequestDTO.getResumeName()!=null){
+            profile.setResumeName(profileRequestDTO.getResumeName());
+        };
+        if(profileRequestDTO.getResumeType()!=null){
+            profile.setResumeType(profileRequestDTO.getResumeType());
+        };
+//        private String ;
+//        private String ;
+//        private int ;
+//        private String ;
+//        private String ;
+//        private String ;
+//        private String ;
+//        private String ;
+//        private String ;
+//        private String ;
+//        private String ;
         return null;
     }
 
